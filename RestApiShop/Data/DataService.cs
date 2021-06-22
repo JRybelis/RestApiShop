@@ -13,11 +13,11 @@ namespace RestApiShop.Data
         public List<Fruit> Fruits { get; set; }
         public List<Vegetable> Vegetables { get; set; }
 
-        public DataService(List<Crockery> crockeryPieces, List<Fruit> fruits, List<Vegetable> vegetables)
+        public DataService()
         {
-            CrockeryPieces = crockeryPieces;
-            Fruits = fruits;
-            Vegetables = vegetables;
+            CrockeryPieces = new List<Crockery>();
+            Fruits = new List<Fruit>();
+            Vegetables = new List<Vegetable>();
         }
     }
 }
