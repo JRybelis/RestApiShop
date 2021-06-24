@@ -11,7 +11,10 @@ namespace RestApiShop.Models.Base
     {
         [Key]
         public int Id { get; set; }
+        
+        [MaxLength(51)]
         public string Name { get; set; }
 
+        public bool Deleted { get; set; } = false;
     }
 }

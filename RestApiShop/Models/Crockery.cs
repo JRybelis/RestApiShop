@@ -7,7 +7,7 @@ using RestApiShop.Models.Base;
 
 namespace RestApiShop.Models
 {
-    public class Crockery : Entity
+    public class Crockery : Item
     {
         
     }

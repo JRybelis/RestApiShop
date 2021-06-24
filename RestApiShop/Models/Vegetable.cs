@@ -7,7 +7,7 @@ using RestApiShop.Models.Base;
 
 namespace RestApiShop.Models
 {
-    public class Vegetable : Entity
+    public class Vegetable : Item
     {
         
     }
