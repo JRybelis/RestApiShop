@@ -25,28 +25,31 @@ namespace RestApiShop.Data
             {
                 CrockeryItems.Add(new Crockery()
                 {
-                    Name = "Default crockery set"
+                    Name = "Default crockery set",
+                    ShopId = 2
                 });
                 SaveChanges();
             }
 
-            if (Fruits.Any())
+            if (!Fruits.Any())
             {
                 Fruits.Add(new Fruit()
                 {
-                    Name = "Random fruit"
+                    Name = "Random fruit",
+                    ShopId = 2
                 });
                 SaveChanges();
             }
 
-            //if (!Vegetables.Any())
-            //{
-            //    Vegetables.Add(new Vegetable()
-            //    {
-            //        Name = "Random vegetable"
-            //    });
-            //    SaveChanges();
-            //}
+            if (!Vegetables.Any())
+            {
+                Vegetables.Add(new Vegetable()
+                {
+                    Name = "Random vegetable",
+                    ShopId = 2
+                });
+                SaveChanges();
+            }
         }
         
         public DbSet<Shop> Shops { get; set; }
