@@ -28,10 +28,9 @@ namespace RestApiShop
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddSingleton<DataService>();
-            
             var defaultConnectionString = Configuration.GetConnectionString("DefaultConnectionString");
-            
+
+            services.AddAutoMapper(typeof(Startup));
             services.AddDbContext<DataContext>(d => d.UseSqlServer(defaultConnectionString));
             services.AddControllers();
             services.AddSwaggerGen(c =>
