@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using RestApiShop.Models;
+using RestApiShop.Entities;
 
 namespace RestApiShop.Data
 {
@@ -12,7 +12,41 @@ namespace RestApiShop.Data
     {
         public DataContext(DbContextOptions options) : base(options)
         {
+            if (!Shops.Any())
+            {
+                Shops.Add(new Shop()
+                {
+                    Name = "Default Shop"
+                });
+                SaveChanges();
+            }
 
+            if (!CrockeryItems.Any())
+            {
+                CrockeryItems.Add(new Crockery()
+                {
+                    Name = "Default crockery set"
+                });
+                SaveChanges();
+            }
+
+            if (Fruits.Any())
+            {
+                Fruits.Add(new Fruit()
+                {
+                    Name = "Random fruit"
+                });
+                SaveChanges();
+            }
+
+            //if (!Vegetables.Any())
+            //{
+            //    Vegetables.Add(new Vegetable()
+            //    {
+            //        Name = "Random vegetable"
+            //    });
+            //    SaveChanges();
+            //}
         }
         
         public DbSet<Shop> Shops { get; set; }
@@ -22,13 +56,7 @@ namespace RestApiShop.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //if (!Shops.Any())
-            //{
-            //    Shops.Add(new Shop()
-            //    {
-            //        Name = "Default Shop"
-            //    });
-            //}
+            
         }
 
     }
