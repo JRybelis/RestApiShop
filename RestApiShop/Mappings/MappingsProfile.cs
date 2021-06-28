@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using RestApiShop.Dtos;
 using RestApiShop.Dtos.Crockery;
 using RestApiShop.Dtos.Fruit;
+using RestApiShop.Dtos.Shop;
 using RestApiShop.Dtos.Vegetable;
 using RestApiShop.Entities;
 
@@ -16,6 +18,8 @@ namespace RestApiShop.Mappings
             CreateMap<FruitPutDto, Fruit>().ReverseMap();
             CreateMap<VegetableDto, Vegetable>().ReverseMap();
             CreateMap<VegetablePutDto, Vegetable>().ReverseMap();
+            CreateMap<ShopDto, Shop>().ReverseMap();
+            CreateMap<ShopPutDto, Shop>().ReverseMap();
         }
     }
 }
