@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using RestApiShop.Data;
-using RestApiShop.Models;
+using RestApiShop.Dtos.Crockery;
+using RestApiShop.Entities;
 
 namespace RestApiShop.Controllers
 {
@@ -11,78 +14,68 @@ namespace RestApiShop.Controllers
     [Route("[controller]")]
     public class CrockeryController : ControllerBase
     {
-        //private readonly DataService _dataService;
         private readonly DataContext _context;
+        private readonly IMapper _mapper;
 
-        public CrockeryController(/*DataService dataService,*/ DataContext context)
+        public CrockeryController(DataContext context, IMapper mapper)
         {
-            //_dataService = dataService;
             _context = context ?? throw new ArgumentNullException(nameof(context));
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public List<Crockery> GetAll()
+        public List<CrockeryDto> GetAll()
         {
-            //return _dataService.CrockeryPieces;
-            return _context.CrockeryItems.ToList();
+            var entities = _context.CrockeryItems.Include(s => s.Shop).ToList();
+            var dtos = _mapper.Map<List<CrockeryDto>>(entities);
+
+            return dtos;
         }
 
         [HttpGet("{id}")]
-        public Crockery GetById(int id)
+        public CrockeryDto GetById(int id)
         {
-            //var crockeryPiece = _dataService.CrockeryPieces.FirstOrDefault(c => c.Id == id);
-
-            var crockeryPiece = _context.CrockeryItems.FirstOrDefault(c => c.Id == id);
-
-            if (crockeryPiece == null)
+            var entity = _context.CrockeryItems.Include(s => s.Shop).FirstOrDefault(e => e.Id == id);
+            if (entity == null)
             {
                 throw new KeyNotFoundException();
             }
 
-            return crockeryPiece;
+            var dto = _mapper.Map<CrockeryDto>(entity);
+
+            return dto;
         }
 
         [HttpPost]
-        public void Create(Crockery crockeryPiece)
+        public void Create(CrockeryDto crockeryPiece)
         {
-            //_dataService.CrockeryPieces.Add(crockeryPiece);
-            _context.Add(crockeryPiece);
+            var dto = _mapper.Map<Crockery>(crockeryPiece);
+            
+            _context.CrockeryItems.Add(dto);
             _context.SaveChanges();
         }
 
         [HttpPut]
-        public void Update(Crockery crockeryPiece)
+        public void Update(CrockeryPutDto crockeryPiece)
         {
-            //var crockeryPieceToUpdate = _dataService.CrockeryPieces.FirstOrDefault(c => c.Id == crockeryPiece.Id);
-            //if(crockeryPieceToUpdate == null)
-            //{
-            //    throw new KeyNotFoundException();
-            //}
-
-            //_dataService.CrockeryPieces[crockeryPiece.Id] = crockeryPiece;
+            var dto = _mapper.Map<Crockery>(crockeryPiece);
             
-            _context.CrockeryItems.Update(crockeryPiece);
+            _context.CrockeryItems.Update(dto);
             _context.SaveChanges();
         }
 
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            //var crockeryPiece = _dataService.CrockeryPieces.FirstOrDefault(c => c.Id == id);
-
-            var crockeryPiece = _context.CrockeryItems.FirstOrDefault(c => c.Id == id);
-
-            if (crockeryPiece == null)
+            var crockeryItem = _context.CrockeryItems.FirstOrDefault(c => c.Id == id);
+            
+            if (crockeryItem == null)
             {
                 throw new KeyNotFoundException();
             }
-            else
-            {
-                _context.CrockeryItems.Remove(crockeryPiece);
-                _context.SaveChanges();
-            }
-            
-            //_dataService.CrockeryPieces.Remove(crockeryPiece);
+
+            _context.CrockeryItems.Remove(crockeryItem);
+            _context.SaveChanges();
         }
     }
 

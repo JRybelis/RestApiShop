@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using RestApiShop.Data;
-using RestApiShop.Models;
+using RestApiShop.Dtos.Vegetable;
+using RestApiShop.Entities;
 
 namespace RestApiShop.Controllers
 {
@@ -12,42 +15,52 @@ namespace RestApiShop.Controllers
     public class VegetablesController : ControllerBase
     {
         private readonly DataContext _context;
+        private readonly IMapper _mapper;
 
-        public VegetablesController(DataContext context)
+        public VegetablesController(DataContext context, IMapper mapper)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public List<Vegetable> GetAll()
+        public List<VegetableDto> GetAll()
         {
-            return _context.Vegetables.ToList();
+            var entities = _context.Vegetables.Include(s => s.Shop).ToList();
+            var dtos = _mapper.Map<List<VegetableDto>>(entities);
+
+            return dtos;
         }
 
         [HttpGet("{id}")]
-        public Vegetable GetById(int id)
+        public VegetableDto GetById(int id)
         {
-            var vegetable = _context.Vegetables.FirstOrDefault(v => v.Id == id);
-
-            if (vegetable == null)
+            var entity = _context.Vegetables.Include(s => s.Shop).FirstOrDefault(e => e.Id == id);
+            if (entity == null)
             {
                 throw new KeyNotFoundException();
             }
 
-            return vegetable;
+            var dto = _mapper.Map<VegetableDto>(entity);
+            
+            return dto;
         }
 
         [HttpPost]
-        public void Create(Vegetable vegetable)
+        public void Create(VegetableDto vegetable)
         {
-            _context.Add(vegetable);
+            var dto = _mapper.Map<Vegetable>(vegetable);
+
+            _context.Vegetables.Add(dto);
             _context.SaveChanges();
         }
 
         [HttpPut]
-        public void Update(Vegetable vegetable)
+        public void Update(VegetablePutDto vegetable)
         {
-            _context.Vegetables.Update(vegetable);
+            var dto = _mapper.Map<Vegetable>(vegetable);
+
+            _context.Vegetables.Update(dto);
             _context.SaveChanges();
         }
 
@@ -60,11 +73,9 @@ namespace RestApiShop.Controllers
             {
                 throw new KeyNotFoundException();
             }
-            else
-            {
-                _context.Vegetables.Remove(vegetable);
-                _context.SaveChanges();
-            }
+
+            _context.Vegetables.Remove(vegetable);
+            _context.SaveChanges();
         }
     }
 

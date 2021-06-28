@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using RestApiShop.Data;
-using RestApiShop.Models;
+using RestApiShop.Dtos.Fruit;
+using RestApiShop.Entities;
 
 namespace RestApiShop.Controllers
 {
@@ -12,43 +14,53 @@ namespace RestApiShop.Controllers
     public class FruitController : ControllerBase
     {
         private readonly DataContext _context;
+        private readonly IMapper _mapper;
 
-        public FruitController(DataContext context)
+        public FruitController(DataContext context, IMapper mapper)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public List<Fruit> GetAll()
+        public List<FruitDto> GetAll()
         {
-            return _context.Fruits.ToList();
+            var entities = _context.Fruits.ToList();
+            var dtos = _mapper.Map<List<FruitDto>>(entities);
+
+            return dtos;
         }
 
         [HttpGet("{id}")]
-        public Fruit GetById(int id)
+        public FruitDto GetById(int id)
         {
-            var fruit = _context.Fruits.FirstOrDefault(f => f.Id == id);
-
-            if (fruit == null)
+            var entity = _context.Fruits.FirstOrDefault(e => e.Id == id);
+            if (entity == null)
             {
                 throw new KeyNotFoundException();
             }
 
-            return fruit;
+            var dto = _mapper.Map<FruitDto>(entity);
+
+            return dto;
         }
 
         [HttpPost]
-        public void Create(Fruit fruit)
+        public void Create(FruitDto fruit)
         {
-            _context.Add(fruit);
+            var dto = _mapper.Map<Fruit>(fruit);
+
+            _context.Fruits.Add(dto);
             _context.SaveChanges();
         }
 
         [HttpPut]
-        public void Update(Fruit fruit)
+        public void Update(FruitPutDto fruit)
         {
-            _context.Fruits.Update(fruit);
-            _context.SaveChanges();
+            var dto = _mapper.Map<Fruit>(fruit);
+
+           _context.Fruits.Update(dto);
+           _context.SaveChanges();
         }
 
         [HttpDelete("{id}")]
@@ -60,11 +72,9 @@ namespace RestApiShop.Controllers
             {
                 throw new KeyNotFoundException();
             }
-            else
-            {
-                _context.Fruits.Remove(fruit);
-                _context.SaveChanges();
-            }
+
+            _context.Fruits.Remove(fruit);
+            _context.SaveChanges();
         }
     }
 
