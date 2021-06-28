@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace RestApiShop.Dtos
+namespace RestApiShop.Dtos.Crockery
 {
-    public class FruitDto
+    public class CrockeryDto
     {
         [MaxLength(51)]
         public string Name { get; set; }
