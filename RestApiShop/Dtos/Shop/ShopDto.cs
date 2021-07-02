@@ -1,7 +1,11 @@
-﻿namespace RestApiShop.Dtos.Shop
+﻿using System.ComponentModel.DataAnnotations;
+using RestApiShop.Dtos.Base;
+
+namespace RestApiShop.Dtos.Shop
 {
-    public class ShopDto
+    public class ShopDto : DtoObject
     {
-        public string Name {get; set; }
+        [Key] public int? Id { get; set; }
     }
+    
 }

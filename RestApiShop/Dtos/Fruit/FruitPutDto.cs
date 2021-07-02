@@ -1,14 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using RestApiShop.Dtos.Base;
 
 namespace RestApiShop.Dtos.Fruit
 {
-    public class FruitPutDto
+    public class FruitPutDto : DtoShopItem
     {
-        [Key]
-        public int Id { get; set; }
-
-        [MaxLength(51)]
-        public string Name { get; set; }
-        public int ShopId { get; set; }
+        [Key] public int Id { get; set; }
     }
 }

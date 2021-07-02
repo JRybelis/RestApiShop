@@ -1,16 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using RestApiShop.Dtos.Base;
 
 namespace RestApiShop.Dtos.Crockery
 {
-    public class CrockeryPutDto
+    public class CrockeryPutDto: DtoShopItem
     {
-        [Key]
-        public int Id { get; set; }
-        
-        [MaxLength(51)] 
-        public string Name { get; set; }
-
-        public int ShopId { get; set; }
-
+        [Key] public int? Id { get; set; }
     }
 }
