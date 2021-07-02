@@ -59,7 +59,10 @@ namespace RestApiShop.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
+            modelBuilder.Entity<Shop>()
+                .HasMany(s => s.CrockeryItems)
+                .WithOne(c => c.Shop)
+                .HasForeignKey(c => c.ShopId);
         }
 
     }

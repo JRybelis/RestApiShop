@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using RestApiShop.Data;
 using RestApiShop.Dtos.Shop;
 using RestApiShop.Entities;
@@ -23,18 +25,18 @@ namespace RestApiShop.Controllers
         }
 
         [HttpGet]
-        public List<ShopDto> GetAll()
+        public async Task<IEnumerable<ShopDto>> GetAll()
         {
-            var entities = _context.Shops.ToList();    
+            var entities = await _context.Shops.ToListAsync();    
             var dtos = _mapper.Map<List<ShopDto>>(entities);
 
             return dtos;
         }
 
         [HttpGet("{id}")]
-        public ShopDto GetById(int id)
+        public async Task<ShopDto> GetById(int id)
         {
-            var entity = _context.Shops.FirstOrDefault(s => s.Id == id);
+            var entity = await _context.Shops.FirstOrDefaultAsync(s => s.Id == id);
             if (entity == null)
             {
                 throw new KeyNotFoundException();
@@ -46,27 +48,27 @@ namespace RestApiShop.Controllers
         }
 
         [HttpPost]
-        public void Create(ShopDto shop)
+        public async Task Create(ShopDto shop)
         {
             var dto = _mapper.Map<Shop>(shop);
 
             _context.Shops.Add(dto);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
         [HttpPut]
-        public void Update(ShopPutDto shop)
+        public async Task Update(ShopPutDto shop)
         {
             var dto = _mapper.Map<Shop>(shop);
 
             _context.Shops.Update(dto);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
         [HttpDelete]
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            var shop = _context.Shops.FirstOrDefault(s => s.Id == id);
+            var shop =  await _context.Shops.FirstOrDefaultAsync(s => s.Id == id);
 
             if (shop == null)
             {
@@ -74,7 +76,7 @@ namespace RestApiShop.Controllers
             }
             
             _context.Shops.Remove(shop);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
     }
 }
