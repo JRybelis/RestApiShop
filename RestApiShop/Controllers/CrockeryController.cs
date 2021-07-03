@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RestApiShop.Data;
 using RestApiShop.Dtos.Crockery;
 using RestApiShop.Entities;
+using RestApiShop.Repositories;
 
 namespace RestApiShop.Controllers
 {
@@ -16,11 +18,13 @@ namespace RestApiShop.Controllers
     {
         private readonly DataContext _context;
         private readonly IMapper _mapper;
+        private readonly GenericRepository<Crockery> _repository;
 
-        public CrockeryController(DataContext context, IMapper mapper)
+        public CrockeryController(DataContext context, IMapper mapper, GenericRepository<Crockery> repository)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
             _mapper = mapper;
+            _repository = repository;
         }
 
         [HttpGet]
@@ -47,12 +51,11 @@ namespace RestApiShop.Controllers
         }
 
         [HttpPost]
-        public void Create(CrockeryDto crockeryPiece)
+        public async Task Upsert(CrockeryDto dto)
         {
-            var dto = _mapper.Map<Crockery>(crockeryPiece);
-            
-            _context.CrockeryItems.Add(dto);
-            _context.SaveChanges();
+            var entity = _mapper.Map<Crockery>(dto);
+
+            await _repository.Upsert(entity);
         }
 
         [HttpPut]

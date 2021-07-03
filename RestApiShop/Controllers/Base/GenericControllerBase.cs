@@ -10,7 +10,7 @@ namespace RestApiShop.Controllers.Base
 {
     [ApiController]
     [Route("[controller]")]
-    public class GenericControllerBase<TDto, TEntity> : ControllerBase where TDto : DtoObject where TEntity : Entity
+    public class GenericControllerBase<TDto, TEntity> : ControllerBase where TDto : DtoObject where TEntity : BaseEntity
     {
         private readonly IMapper _mapper;
         private readonly GenericRepository<TEntity> _repository;
@@ -26,7 +26,7 @@ namespace RestApiShop.Controllers.Base
             public async Task<IEnumerable<TDto>> GetAll()
             {
                 var entities = await _repository.GetAll();
-
+                
                 return _mapper.Map<IEnumerable<TDto>>(entities);
             }
         
@@ -45,16 +45,7 @@ namespace RestApiShop.Controllers.Base
 
                 await _repository.Upsert(entity);
             }
-
-            [HttpPut]
-            //public async Task Update(ShopPutDto shopDto)
-            //{
-            //    var entity = _mapper.Map<Shop>(shopDto);
-
-            //    _context.Shops.Update(entity);
-            //    await _context.SaveChangesAsync();
-            //}
-
+        
             [HttpDelete("{id}")]
             public async Task Delete(int id)
             {

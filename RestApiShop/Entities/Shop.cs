@@ -3,7 +3,7 @@ using RestApiShop.Entities.Base;
 
 namespace RestApiShop.Entities
 {
-    public class Shop : Entity
+    public class Shop : BaseEntity
     {
         public List<Crockery> CrockeryItems { get; set; }
         public List<Fruit> Fruits { get; set; }

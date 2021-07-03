@@ -2,7 +2,7 @@
 
 namespace RestApiShop.Entities.Base
 {
-    public abstract class Entity
+    public abstract class BaseEntity
     {
         //[Key]
         public int Id { get; set; }

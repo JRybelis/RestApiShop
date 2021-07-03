@@ -10,7 +10,7 @@ using RestApiShop.Entities.Base;
 
 namespace RestApiShop.Repositories
 {
-    public class GenericRepository<T> where T : Entity
+    public class GenericRepository<T> where T : BaseEntity
     {
         private readonly DataContext _context;
 
