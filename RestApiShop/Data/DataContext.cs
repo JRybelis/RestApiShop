@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using RestApiShop.Entities;
-using RestApiShop.Entities.Base;
 
 namespace RestApiShop.Data
 {
@@ -60,11 +55,61 @@ namespace RestApiShop.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Entity>()
+            //modelBuilder.Entity<BaseEntity>()
+            //    .HasKey(s => s.Id);
+            
+            //modelBuilder.Entity<BaseEntity>()
+            //    .Property(e => e.Name).HasMaxLength(51).IsRequired();
+
+            modelBuilder.Entity<Shop>()
                 .HasKey(s => s.Id);
             
-            modelBuilder.Entity<Entity>()
-                .Property(e => e.Name).HasMaxLength(51).IsRequired();
+            modelBuilder.Entity<Crockery>()
+                .HasKey(c => c.Id);
+
+            modelBuilder.Entity<Fruit>()
+                .HasKey(f => f.Id);
+
+            modelBuilder.Entity<Vegetable>()
+                .HasKey(v => v.Id);
+            
+            
+            modelBuilder.Entity<Shop>()
+                .Property(s => s.Name)
+                .HasMaxLength(51)
+                .IsRequired();
+
+            modelBuilder.Entity<Crockery>()
+                .Property(c => c.Name)
+                .HasMaxLength(51)
+                .IsRequired();
+
+            modelBuilder.Entity<Fruit>()
+                .Property(f => f.Name)
+                .HasMaxLength(51)
+                .IsRequired();
+
+            modelBuilder.Entity<Vegetable>()
+                .Property(v => v.Name)
+                .HasMaxLength(51)
+                .IsRequired();
+
+
+            modelBuilder.Entity<Crockery>()
+                .Property(c => c.Price)
+                .IsRequired()
+                .HasPrecision(9, 2);
+
+            modelBuilder.Entity<Fruit>()
+                .Property(f => f.Price)
+                .IsRequired()
+                .HasPrecision(9, 2);
+
+            modelBuilder.Entity<Vegetable>()
+                .Property(v => v.Price)
+                .IsRequired()
+                .HasPrecision(9, 2);
+
 
             modelBuilder.Entity<Shop>()
                 .HasMany(s => s.CrockeryItems)
