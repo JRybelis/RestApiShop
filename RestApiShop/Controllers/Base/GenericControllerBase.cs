@@ -14,16 +14,15 @@ namespace RestApiShop.Controllers.Base
     {
         private readonly IMapper _mapper;
         private readonly GenericRepository<TEntity> _repository;
-
         
-            public GenericControllerBase(IMapper mapper, GenericRepository<TEntity> repository)
+        public GenericControllerBase(IMapper mapper, GenericRepository<TEntity> repository)
             {
                 _mapper = mapper;
                 _repository = repository;
             }
 
             [HttpGet]
-            public async Task<IEnumerable<TDto>> GetAll()
+            public async virtual Task<IEnumerable<TDto>> GetAll()
             {
                 var entities = await _repository.GetAll();
                 
