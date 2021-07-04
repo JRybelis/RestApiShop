@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.AccessControl;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace RestApiShop.Services
+﻿namespace RestApiShop.Services
 {
     public class DiscountService
     {
@@ -14,6 +7,11 @@ namespace RestApiShop.Services
         public decimal CalculateDiscount(decimal price)
         {
             return price / 100 * DiscountPercentage;
+        }
+
+        public decimal CalculatePriceAfterDiscount(decimal price)
+        {
+            return price - CalculateDiscount(price);
         }
     }
 }
