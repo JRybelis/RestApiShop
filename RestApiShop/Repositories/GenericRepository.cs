@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RestApiShop.Data;
-using RestApiShop.Dtos.Shop;
 using RestApiShop.Entities.Base;
 
 namespace RestApiShop.Repositories
@@ -38,7 +35,7 @@ namespace RestApiShop.Repositories
 
         public async Task Upsert(T entity)
         {
-            if (entity.Id == 0)
+            if (entity.Id != 0)
             {
                 _context.Update(entity);
             }
