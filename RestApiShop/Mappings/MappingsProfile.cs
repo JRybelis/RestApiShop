@@ -13,13 +13,9 @@ namespace RestApiShop.Mappings
         public MappingsProfile()
         {
             CreateMap<CrockeryDto, Crockery>().ReverseMap();
-            CreateMap<CrockeryPutDto, Crockery>().ReverseMap();
             CreateMap<FruitDto, Fruit>().ReverseMap();
-            CreateMap<FruitPutDto, Fruit>().ReverseMap();
             CreateMap<VegetableDto, Vegetable>().ReverseMap();
-            CreateMap<VegetablePutDto, Vegetable>().ReverseMap();
             CreateMap<ShopDto, Shop>().ReverseMap();
-            CreateMap<ShopPutDto, Shop>().ReverseMap();
         }
     }
 }
