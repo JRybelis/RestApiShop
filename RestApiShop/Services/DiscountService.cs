@@ -8,10 +8,5 @@
         {
             return price / 100 * DiscountPercentage;
         }
-
-        public decimal CalculatePriceAfterDiscount(decimal price)
-        {
-            return price - CalculateDiscount(price);
-        }
     }
 }
