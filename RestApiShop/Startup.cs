@@ -27,7 +27,7 @@ namespace RestApiShop
 
             services.AddAutoMapper(typeof(Startup));
             services.AddDbContext<DataContext>(d => d.UseSqlServer(defaultConnectionString));
-            services.AddScoped(typeof(GenericRepository<>));
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped(typeof(GenericControllerBase<,>));
 
             services.AddControllers();
