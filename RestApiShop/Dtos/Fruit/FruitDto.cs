@@ -3,8 +3,8 @@ using RestApiShop.Dtos.Base;
 
 namespace RestApiShop.Dtos.Fruit
 {
-    public class FruitDto : DtoShopItem
+    public class FruitDto : ShopItemDto
     {
-        [Key] public int? Id { get; set; }
+
     }
 }

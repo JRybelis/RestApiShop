@@ -1,10 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
-using RestApiShop.Dtos.Base;
+﻿using RestApiShop.Dtos.Base;
 
 namespace RestApiShop.Dtos.Crockery
 {
-    public class CrockeryDto : DtoShopItem
+    public class CrockeryDto : ShopItemDto
     {
-        [Key] public int? Id { get; set; }
+        
     }
 }
