@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using RestApiShop.Entities;
+using RestApiShop.Entities.Base;
 
 namespace RestApiShop.Data
 {
@@ -53,14 +54,19 @@ namespace RestApiShop.Data
         public DbSet<Fruit> Fruits { get; set; }
         public DbSet<Vegetable> Vegetables { get; set; }
 
+        //iregistruoti Item cia ? 
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<BaseEntity>()
-            //    .HasKey(s => s.Id);
+            ConfigureEntityPrimaryKeys(modelBuilder);
+            ConfigureEntityProperties(modelBuilder);
+            ConfigureEntityRelationships(modelBuilder);
+        }
+        
+        private void ConfigureEntityPrimaryKeys(ModelBuilder modelBuilder)
+        {
             
-            //modelBuilder.Entity<BaseEntity>()
-            //    .Property(e => e.Name).HasMaxLength(51).IsRequired();
-
             modelBuilder.Entity<Shop>()
                 .HasKey(s => s.Id);
             
@@ -72,8 +78,10 @@ namespace RestApiShop.Data
 
             modelBuilder.Entity<Vegetable>()
                 .HasKey(v => v.Id);
-            
-            
+        }
+
+        private void ConfigureEntityProperties(ModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<Shop>()
                 .Property(s => s.Name)
                 .HasMaxLength(51)
@@ -109,8 +117,10 @@ namespace RestApiShop.Data
                 .Property(v => v.Price)
                 .IsRequired()
                 .HasPrecision(9, 2);
+        }
 
-
+        private void ConfigureEntityRelationships(ModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<Shop>()
                 .HasMany(s => s.CrockeryItems)
                 .WithOne(c => c.Shop)
@@ -126,6 +136,6 @@ namespace RestApiShop.Data
                 .WithOne(v => v.Shop)
                 .HasForeignKey(v => v.ShopId);
         }
+    }   
 
-    }
 }
