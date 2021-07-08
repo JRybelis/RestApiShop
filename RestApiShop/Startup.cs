@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using RestApiShop.Controllers.Base;
 using RestApiShop.Data;
 using RestApiShop.Repositories;
+using RestApiShop.Services;
 
 namespace RestApiShop
 {
@@ -29,6 +30,9 @@ namespace RestApiShop
             services.AddDbContext<DataContext>(d => d.UseSqlServer(defaultConnectionString));
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped(typeof(GenericControllerBase<,>));
+
+            services.AddScoped(typeof(PriceCalculationService<>));
+            services.AddScoped(typeof(DiscountService));
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
