@@ -2,7 +2,7 @@
 
 namespace RestApiShop.Services
 {
-    public class PriceCalculationService
+    public class PriceCalculationService<TDto> where TDto : ShopItemDto
     {
         private readonly DiscountService _discountService;
 
@@ -11,13 +11,13 @@ namespace RestApiShop.Services
             _discountService = discountService;
         }
 
-        public ShopItemDto ApplyDiscount(ShopItemDto shopItemDto)
+        public TDto ApplyDiscount(TDto tDto)
         {
-            if (shopItemDto.Price.HasValue)
+            if (tDto.Price.HasValue)
             {
-                shopItemDto.Price -= _discountService.CalculateDiscount(shopItemDto.Price.Value);
+                tDto.Price -= _discountService.CalculateDiscount(tDto.Price.Value);
             }
-            return shopItemDto;
+            return tDto;
         }
     }
 }
