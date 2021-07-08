@@ -30,7 +30,7 @@ namespace RestApiShop.Repositories
                 throw new ArgumentNullException(nameof(entity));
             }
 
-            return entity ;
+            return entity;
         }
 
         public async Task Upsert(T entity)

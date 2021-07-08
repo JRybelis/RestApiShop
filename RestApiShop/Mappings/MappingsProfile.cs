@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using RestApiShop.Dtos;
 using RestApiShop.Dtos.Base;
 using RestApiShop.Dtos.Crockery;
 using RestApiShop.Dtos.Fruit;
