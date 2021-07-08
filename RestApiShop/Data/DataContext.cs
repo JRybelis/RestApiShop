@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using RestApiShop.Entities;
-using RestApiShop.Entities.Base;
 
 namespace RestApiShop.Data
 {
@@ -54,8 +53,6 @@ namespace RestApiShop.Data
         public DbSet<Fruit> Fruits { get; set; }
         public DbSet<Vegetable> Vegetables { get; set; }
 
-        //iregistruoti Item cia ? 
-
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -64,7 +61,7 @@ namespace RestApiShop.Data
             ConfigureEntityRelationships(modelBuilder);
         }
         
-        private void ConfigureEntityPrimaryKeys(ModelBuilder modelBuilder)
+        private static void ConfigureEntityPrimaryKeys(ModelBuilder modelBuilder)
         {
             
             modelBuilder.Entity<Shop>()
@@ -80,7 +77,7 @@ namespace RestApiShop.Data
                 .HasKey(v => v.Id);
         }
 
-        private void ConfigureEntityProperties(ModelBuilder modelBuilder)
+        private static void ConfigureEntityProperties(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Shop>()
                 .Property(s => s.Name)
@@ -119,7 +116,7 @@ namespace RestApiShop.Data
                 .HasPrecision(9, 2);
         }
 
-        private void ConfigureEntityRelationships(ModelBuilder modelBuilder)
+        private static void ConfigureEntityRelationships(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Shop>()
                 .HasMany(s => s.CrockeryItems)
