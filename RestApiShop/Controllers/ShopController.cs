@@ -11,7 +11,7 @@ namespace RestApiShop.Controllers
     [Route("[controller]")]
     public class ShopController : GenericControllerBase<ShopDto, Shop>
     {
-        public ShopController(IMapper mapper, GenericRepository<Shop> repository) : base(mapper, repository)
+        public ShopController(IMapper mapper, IGenericRepository<Shop> repository) : base(mapper, repository)
         {
 
         }
