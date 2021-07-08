@@ -10,7 +10,7 @@ namespace RestApiShop.Controllers.Base
 {
     [ApiController]
     [Route("[controller]")]
-    public class GenericControllerBase<TDto, TEntity> : ControllerBase where TDto : DtoObject where TEntity : BaseEntity
+    public  class GenericControllerBase<TDto, TEntity> : ControllerBase where TDto : ObjectDto where TEntity : BaseEntity
     {
         private readonly IMapper _mapper;
         private readonly IGenericRepository<TEntity> _repository;
