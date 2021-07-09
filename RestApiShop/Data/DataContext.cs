@@ -50,6 +50,7 @@ namespace RestApiShop.Data
         }
         
         public DbSet<Shop> Shops { get; set; }
+        public DbSet<ShopOwnerShop> ShopOwnerShops { get; set; }
 
         public DbSet<Crockery> CrockeryItems { get; set; }
         public DbSet<Fruit> Fruits { get; set; }
