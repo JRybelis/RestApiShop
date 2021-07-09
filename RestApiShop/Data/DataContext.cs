@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using RestApiShop.Entities;
+using RestApiShop.Entities.Relational;
 
 namespace RestApiShop.Data
 {
@@ -49,6 +50,7 @@ namespace RestApiShop.Data
         }
         
         public DbSet<Shop> Shops { get; set; }
+
         public DbSet<Crockery> CrockeryItems { get; set; }
         public DbSet<Fruit> Fruits { get; set; }
         public DbSet<Vegetable> Vegetables { get; set; }
@@ -69,6 +71,9 @@ namespace RestApiShop.Data
 
             modelBuilder.Entity<ShopOwner>()
                 .HasKey(so => so.Id);
+
+            modelBuilder.Entity<ShopOwnerShop>()
+                .HasKey(sos => new {sos.ShopId, sos.ShopOwnerId});
             
             modelBuilder.Entity<Crockery>()
                 .HasKey(c => c.Id);
@@ -148,10 +153,16 @@ namespace RestApiShop.Data
                 .WithOne(v => v.Shop)
                 .HasForeignKey(v => v.ShopId);
 
-            modelBuilder.Entity<Shop>()
-                .HasMany(s => s.ShopOwners)
-                .WithOne()
-                .HasForeignKey(si => si.SingleShopId);
+            modelBuilder.Entity<ShopOwnerShop>()
+                .HasOne(s => s.ShopOwner)
+                .WithMany(so => so.Shops)
+                .HasForeignKey(s => s.ShopOwnerId);
+
+            modelBuilder.Entity<ShopOwnerShop>()
+                .HasOne(so => so.Shop)
+                .WithMany(s => s.ShopOwners)
+                .HasForeignKey(so => so.ShopId);
+
         }
     }   
 
