@@ -6,6 +6,7 @@ using RestApiShop.Dtos.Shop;
 using RestApiShop.Dtos.Vegetable;
 using RestApiShop.Entities;
 using RestApiShop.Entities.Base;
+using RestApiShop.Entities.ShopItems;
 
 namespace RestApiShop.Mappings
 {

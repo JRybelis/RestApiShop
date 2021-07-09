@@ -5,7 +5,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using RestApiShop.Controllers.Base;
 using RestApiShop.Dtos.Fruit;
-using RestApiShop.Entities;
+using RestApiShop.Entities.ShopItems;
 using RestApiShop.Repositories;
 using RestApiShop.Services;
 

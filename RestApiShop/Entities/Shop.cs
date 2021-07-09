@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using RestApiShop.Entities.Base;
 using RestApiShop.Entities.Relational;
+using RestApiShop.Entities.ShopItems;
 
 namespace RestApiShop.Entities
 {

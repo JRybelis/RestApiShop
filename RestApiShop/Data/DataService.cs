@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using RestApiShop.Entities;
+using RestApiShop.Entities.ShopItems;
 
 namespace RestApiShop.Data
 {
