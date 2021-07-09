@@ -8,5 +8,6 @@ namespace RestApiShop.Entities
         public List<Crockery> CrockeryItems { get; set; }
         public List<Fruit> Fruits { get; set; }
         public List<Vegetable> Vegetables { get; set; }
+        public List<ShopOwner> ShopOwners { get; set; }
     }
 }

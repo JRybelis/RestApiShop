@@ -66,6 +66,9 @@ namespace RestApiShop.Data
             
             modelBuilder.Entity<Shop>()
                 .HasKey(s => s.Id);
+
+            modelBuilder.Entity<ShopOwner>()
+                .HasKey(so => so.Id);
             
             modelBuilder.Entity<Crockery>()
                 .HasKey(c => c.Id);
@@ -114,6 +117,18 @@ namespace RestApiShop.Data
                 .Property(v => v.Price)
                 .IsRequired()
                 .HasPrecision(9, 2);
+
+            
+            modelBuilder.Entity<ShopOwner>()
+                .Property(so => so.Forename)
+                .IsRequired()
+                .HasMaxLength(51);
+
+
+            modelBuilder.Entity<ShopOwner>()
+                .Property(so => so.Surname)
+                .IsRequired()
+                .HasMaxLength(51);
         }
 
         private static void ConfigureEntityRelationships(ModelBuilder modelBuilder)
@@ -132,6 +147,11 @@ namespace RestApiShop.Data
                 .HasMany(s => s.Vegetables)
                 .WithOne(v => v.Shop)
                 .HasForeignKey(v => v.ShopId);
+
+            modelBuilder.Entity<Shop>()
+                .HasMany(s => s.ShopOwners)
+                .WithOne()
+                .HasForeignKey(si => si.SingleShopId);
         }
     }   
 
