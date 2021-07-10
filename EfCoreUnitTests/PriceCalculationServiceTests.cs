@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using RestApiShop.Dtos.Base;
 using RestApiShop.Dtos.Crockery;
 using RestApiShop.Services;
 using Xunit;
@@ -15,7 +16,7 @@ namespace EfCoreUnitTests
             //Arrange
             var discountService = new DiscountService();
             
-            var priceCalculationService = new PriceCalculationService(discountService);
+            var priceCalculationService = new PriceCalculationService<CrockeryDto>(discountService);
 
             //Act
             var discountedCrockeryItem = priceCalculationService.ApplyDiscount(crockeryItem);

@@ -15,7 +15,7 @@ namespace EfCoreUnitTests
             var discountService = new DiscountService();
 
             // Act
-            var returnedDiscount = discountService.CalculateDiscount(price);
+            var returnedDiscount = discountService.CalculateDiscount(price, 5);
 
             // Assert
             returnedDiscount.Should().Be(0.3M);

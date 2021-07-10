@@ -3,11 +3,11 @@ using System.Threading.Tasks;
 using AutoMapper;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
-using RestApiShop.Controllers.Base;
+using RestApiShop.Controllers;
 using RestApiShop.Data;
 using RestApiShop.Dtos.Crockery;
 using RestApiShop.Entities;
-using RestApiShop.Entities.Base;
+using RestApiShop.Entities.ShopItems;
 using RestApiShop.Mappings;
 using RestApiShop.Repositories;
 using RestApiShop.Services;
@@ -15,7 +15,7 @@ using Xunit;
 
 namespace EfCoreUnitTests
 {
-    public class ShopItemControllerTests
+    public class CrockeryControllerTests
     {
         [Fact]
         public async Task Test()
@@ -28,11 +28,12 @@ namespace EfCoreUnitTests
             });
             var mapper = mockMapper.CreateMapper();
             var discountService = new DiscountService();
-            var priceCalculationService = new PriceCalculationService(discountService);
+            var priceCalculationService = new PriceCalculationService<CrockeryDto>(discountService);
             var mockContext = new DataContext(GetInMemoryDbContextOptions());
-            mockContext.Shops.Add(new Shop() {Id = 1});
-            var repository = new GenericRepository<Item>(mockContext);
-            var shopItemController = new ShopItemController(mapper, repository, priceCalculationService);
+            mockContext.Shops.Add(new Shop() {Id = 99});
+            mockContext.SaveChanges();
+            var repository = new GenericRepository<Crockery>(mockContext);
+            var crockeryController = new CrockeryController(mapper, repository, priceCalculationService);
             var crockeryDto = new CrockeryDto()
             {
                 Name = "TestCrockery",
@@ -43,8 +44,8 @@ namespace EfCoreUnitTests
             //Arrange end
             //Act
 
-            await shopItemController.Upsert(crockeryDto);
-            var results = await shopItemController.GetAll();
+            await crockeryController.Upsert(crockeryDto);
+            var results = await crockeryController.GetAll();
 
             //Assert
 
