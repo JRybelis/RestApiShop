@@ -1,4 +1,4 @@
-﻿    using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using RestApiShop.Entities.Base;
 
@@ -11,6 +11,7 @@ namespace RestApiShop.Repositories
         Task Upsert(T entity);
         Task Delete(int id);
         Task<T> GetByName(string itemName);
-        
+        Task UpdateItemQuantity(Item entity, int quantity);
+
     }
 }

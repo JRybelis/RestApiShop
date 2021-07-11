@@ -68,5 +68,22 @@ namespace RestApiShop.Repositories
 
             return entity;
         }
+
+        public async Task UpdateItemQuantity(Item entity, int quantity)
+        {
+            if (quantity < entity.Quantity)
+            {
+                entity.Quantity -= quantity;
+                
+                _context.Update(entity);
+                
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException(
+                    $"Amount requested ({quantity}) cannot exceed the current stock level of {entity.Name}: {entity.Quantity}.");
+            }
+        }
     }
 }

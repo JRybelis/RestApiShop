@@ -33,5 +33,10 @@ namespace RestApiShop.Repositories
         {
             return null;
         }
+
+        public Task UpdateItemQuantity(Item entity, int quantity)
+        {
+            return Task.CompletedTask;
+        }
     }
 }
