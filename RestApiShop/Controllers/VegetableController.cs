@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using RestApiShop.Data;
+using Microsoft.EntityFrameworkCore;
 using RestApiShop.Dtos.Base;
 using RestApiShop.Dtos.Vegetable;
 using RestApiShop.Entities.ShopItems;
@@ -17,16 +18,15 @@ namespace RestApiShop.Controllers
     public class VegetableController : ControllerBase
     {
         private readonly IMapper _mapper;
-        private DataContext _context;
         private readonly IGenericRepository<Vegetable> _repository;
-        private readonly PriceCalculationService<VegetableDto> _priceCalculation;
+        private readonly PurchasingService<VegetableDto> _purchasingService;
 
-        public VegetableController(IMapper mapper, IGenericRepository<Vegetable> repository, PriceCalculationService<VegetableDto> priceCalculation, DataContext context)
+
+        public VegetableController(IMapper mapper, IGenericRepository<Vegetable> repository, PurchasingService<VegetableDto> purchasingService)
         {
             _mapper = mapper;
             _repository = repository;
-            _priceCalculation = priceCalculation;
-            _context = context;
+            _purchasingService = purchasingService;
         }
 
         [HttpGet]
@@ -34,9 +34,10 @@ namespace RestApiShop.Controllers
         {
             var entities = await _repository.GetAll();
             var dtos = _mapper.Map<IEnumerable<VegetableDto>>(entities);
-            var updatedDtos = dtos.Select(d => _priceCalculation.ApplyDiscount(d));
+            //var updatedDtos = dtos.Select(d => _priceCalculation.ApplyDiscount(d));
 
-            return updatedDtos;
+            //return updatedDtos;
+            return dtos;
         }
 
         [HttpGet("{id}")]
@@ -60,12 +61,12 @@ namespace RestApiShop.Controllers
         }
 
         [HttpPost("/buy")]
-        public decimal Buy(BuyItemDto buyItemDto)
+        public async Task<decimal> Buy(string itemName, int quantity)
         {
-            var item = _context.Vegetables.FirstOrDefault(v => v.Name == buyItemDto.ItemName);
-            var totalPrice = item.Price * buyItemDto.Quantity;
+            var item = await _repository.GetByName(itemName);
+            var itemDto = _mapper.Map<VegetableDto>(item);
 
-            return totalPrice;
+            return _purchasingService.Buy(itemDto, quantity);
         }
     }
 

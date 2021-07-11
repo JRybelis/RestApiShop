@@ -16,7 +16,7 @@ namespace RestApiShop.Services
             _priceCalculationService = priceCalculationService;
         }
 
-        public TDto Buy(TDto tDto, int quantity)
+        public decimal Buy(TDto tDto, int quantity)
         {
             if (quantity < tDto.Quantity)
             {
@@ -29,7 +29,7 @@ namespace RestApiShop.Services
                     $"Amount requested ({quantity}) cannot exceed the current stock level of {tDto.Name}: {tDto.Quantity}.");
             }
             
-            return tDto;
+            return tDto.Price.Value;
         }
     }
 }
