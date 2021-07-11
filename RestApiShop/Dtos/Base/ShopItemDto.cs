@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace RestApiShop.Dtos.Base
 {
@@ -7,5 +8,7 @@ namespace RestApiShop.Dtos.Base
         public int ShopId { get; set; }
         public decimal? Price { get; set; }
         [Key] public int? Id { get; set; }
+        public string Type { get; set; }
+        public int Quantity { get; set; }
     }
 }
