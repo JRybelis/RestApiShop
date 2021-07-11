@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using RestApiShop.Dtos.Base;
 using RestApiShop.Dtos.Vegetable;
 using RestApiShop.Entities.ShopItems;
 using RestApiShop.Repositories;
@@ -19,14 +15,14 @@ namespace RestApiShop.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IGenericRepository<Vegetable> _repository;
-        private readonly PurchasingService<VegetableDto> _purchasingService;
+        private readonly PriceCalculationService<VegetableDto> _priceCalculationService;
 
 
-        public VegetableController(IMapper mapper, IGenericRepository<Vegetable> repository, PurchasingService<VegetableDto> purchasingService)
+        public VegetableController(IMapper mapper, IGenericRepository<Vegetable> repository, PriceCalculationService<VegetableDto> priceCalculationService)
         {
             _mapper = mapper;
             _repository = repository;
-            _purchasingService = purchasingService;
+            _priceCalculationService = priceCalculationService;
         }
 
         [HttpGet]
@@ -34,9 +30,7 @@ namespace RestApiShop.Controllers
         {
             var entities = await _repository.GetAll();
             var dtos = _mapper.Map<IEnumerable<VegetableDto>>(entities);
-            //var updatedDtos = dtos.Select(d => _priceCalculation.ApplyDiscount(d));
-
-            //return updatedDtos;
+            
             return dtos;
         }
 
@@ -66,7 +60,9 @@ namespace RestApiShop.Controllers
             var item = await _repository.GetByName(itemName);
             var itemDto = _mapper.Map<VegetableDto>(item);
 
-            return _purchasingService.Buy(itemDto, quantity);
+            await _repository.UpdateItemQuantity(item, quantity);
+
+            return _priceCalculationService.ApplyDiscount(itemDto, quantity);
         }
     }
 
