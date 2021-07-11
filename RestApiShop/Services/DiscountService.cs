@@ -2,11 +2,19 @@
 {
     public class DiscountService
     {
-        private const int DiscountPercentage = 10;
+        private int _discountPercentage;
 
-        public decimal CalculateDiscount(decimal price)
+        public decimal CalculateDiscount(decimal price, int? quantity)
         {
-            return price / 100 * DiscountPercentage;
+            _discountPercentage = quantity switch
+            {
+                >= 5 => 20,
+                < 5 and > 0 => 10,
+                _ => _discountPercentage
+            };
+
+            return price / 100 * _discountPercentage;
         }
     }
+
 }
