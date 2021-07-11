@@ -1,4 +1,6 @@
-﻿namespace RestApiShop.Services
+﻿using System;
+
+namespace RestApiShop.Services
 {
     public class DiscountService
     {
@@ -6,13 +8,27 @@
 
         public decimal CalculateDiscount(decimal price, int? quantity)
         {
-            _discountPercentage = quantity switch
+            try
             {
-                >= 5 => 20,
-                < 5 and > 0 => 10,
-                _ => _discountPercentage
-            };
-
+                _discountPercentage = quantity switch
+                {
+                    >= 5 => 20,
+                    < 5 and > 0 => 10,
+                    _ => _discountPercentage
+                };
+            }
+            
+            catch (ArgumentOutOfRangeException e)
+            {
+                Console.WriteLine(e.Message);
+                throw;
+            }
+            catch (FormatException e)
+            {
+                Console.WriteLine(e.Message);
+                throw;
+            }
+            
             return price / 100 * _discountPercentage;
         }
     }
