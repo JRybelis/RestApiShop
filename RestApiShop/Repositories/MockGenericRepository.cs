@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using RestApiShop.Entities.Base;
+using RestApiShop.Entities.ShopItems;
+using RestApiShop.Interfaces;
 
 namespace RestApiShop.Repositories
 {
@@ -11,7 +10,13 @@ namespace RestApiShop.Repositories
     {
         public Task<IEnumerable<T>> GetAll()
         {
-            return null;
+            return Task.FromResult(new List<T>()
+            {
+                new T()
+                {
+                    Name = "TestName"
+                }
+            });
         }
 
         public Task<T> GetById(int id)

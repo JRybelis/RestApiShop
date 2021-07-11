@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using RestApiShop.Entities.Base;
 
-namespace RestApiShop.Repositories
+namespace RestApiShop.Interfaces
 {
     public interface IGenericRepository<T> where T : BaseEntity
     {

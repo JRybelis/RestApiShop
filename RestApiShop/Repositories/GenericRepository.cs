@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using RestApiShop.Data;
 using RestApiShop.Entities.Base;
+using RestApiShop.Interfaces;
 
 namespace RestApiShop.Repositories
 {

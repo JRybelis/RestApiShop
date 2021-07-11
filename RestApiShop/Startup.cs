@@ -7,6 +7,7 @@ using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
 using RestApiShop.Controllers.Base;
 using RestApiShop.Data;
+using RestApiShop.Interfaces;
 using RestApiShop.Repositories;
 using RestApiShop.Services;
 
