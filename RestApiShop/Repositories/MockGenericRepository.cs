@@ -28,5 +28,10 @@ namespace RestApiShop.Repositories
         {
             return Task.CompletedTask;
         }
+
+        public Task<T> GetByName(string itemName)
+        {
+            return null;
+        }
     }
 }

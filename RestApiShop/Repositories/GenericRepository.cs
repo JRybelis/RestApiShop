@@ -56,5 +56,17 @@ namespace RestApiShop.Repositories
             }
             await _context.SaveChangesAsync();
         }
+
+        public async Task<T> GetByName(string itemName)
+        {
+            var entity = await _context.Set<T>().FirstOrDefaultAsync(e => e.Name == itemName);
+
+            if (entity == null)
+            {
+                throw new ArgumentNullException(nameof(entity));
+            }
+
+            return entity;
+        }
     }
 }
