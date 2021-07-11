@@ -1,4 +1,5 @@
-﻿using RestApiShop.Dtos.Base;
+﻿using System.Diagnostics;
+using RestApiShop.Dtos.Base;
 
 namespace RestApiShop.Services
 {
@@ -11,13 +12,16 @@ namespace RestApiShop.Services
             _discountService = discountService;
         }
 
-        public TDto ApplyDiscount(TDto tDto)
+        public decimal ApplyDiscount(TDto tDto, int quantity
+            )
         {
             if (tDto.Price.HasValue)
             {
-                tDto.Price -= _discountService.CalculateDiscount(tDto.Price.Value);
+                tDto.Price -= _discountService.CalculateDiscount(tDto.Price.Value, quantity);
             }
-            return tDto;
+
+            Debug.Assert(tDto.Price != null, "tDto.Price != null");
+            return tDto.Price.Value;
         }
     }
 }
