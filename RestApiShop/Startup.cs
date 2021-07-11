@@ -31,7 +31,6 @@ namespace RestApiShop
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped(typeof(GenericControllerBase<,>));
 
-            services.AddScoped(typeof(PurchasingService<>));
             services.AddScoped(typeof(PriceCalculationService<>));
             services.AddScoped(typeof(DiscountService));
 

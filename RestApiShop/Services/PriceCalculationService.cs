@@ -21,7 +21,7 @@ namespace RestApiShop.Services
             }
 
             Debug.Assert(tDto.Price != null, "tDto.Price != null");
-            return tDto.Price.Value;
+            return tDto.Price.Value * quantity;
         }
     }
 }
