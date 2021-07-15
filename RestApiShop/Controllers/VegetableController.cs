@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using AutoMapper.Internal;
 using Microsoft.AspNetCore.Mvc;
 using RestApiShop.Dtos.Vegetable;
 using RestApiShop.Entities.ShopItems;
-using RestApiShop.Repositories;
+using RestApiShop.Interfaces;
 using RestApiShop.Services;
 
 namespace RestApiShop.Controllers
@@ -26,10 +28,12 @@ namespace RestApiShop.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<VegetableDto>> GetAll()
+        public async Task<List<VegetableDto>> GetAll()
         {
             var entities = await _repository.GetAll();
-            var dtos = _mapper.Map<IEnumerable<VegetableDto>>(entities);
+            var dtos = _mapper.Map<List<VegetableDto>>(entities);
+
+            dtos.ForEach(d => d.Price = _priceCalculationService.ApplyDiscount(d, 1));
             
             return dtos;
         }
