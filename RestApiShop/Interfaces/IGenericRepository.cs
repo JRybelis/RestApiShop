@@ -6,7 +6,7 @@ namespace RestApiShop.Interfaces
 {
     public interface IGenericRepository<T> where T : BaseEntity
     {
-        Task<IEnumerable<T>> GetAll();
+        Task<List<T>> GetAll();
         Task<T> GetById(int id);
         Task Upsert(T entity);
         Task Delete(int id);
