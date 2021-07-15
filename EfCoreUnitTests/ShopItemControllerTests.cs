@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoFixture;
 using AutoMapper;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
@@ -31,6 +32,9 @@ namespace EfCoreUnitTests
 
             var discountService = new DiscountService();
             var priceCalculationService = new PriceCalculationService<VegetableDto>(discountService);
+
+            var autoFixture = new Fixture();
+            var vegetable = autoFixture.Build<Vegetable>().With(v => v.Quantity, 1).Create();
             
             var repository = new Mock<IGenericRepository<Vegetable>>();
             repository.Setup(r => r.GetAll()).ReturnsAsync(new List<Vegetable>()
