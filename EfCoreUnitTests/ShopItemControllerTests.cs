@@ -1,24 +1,25 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
+using Moq;
 using RestApiShop.Controllers;
 using RestApiShop.Data;
-using RestApiShop.Dtos.Crockery;
-using RestApiShop.Entities;
+using RestApiShop.Dtos.Vegetable;
 using RestApiShop.Entities.ShopItems;
+using RestApiShop.Interfaces;
 using RestApiShop.Mappings;
-using RestApiShop.Repositories;
 using RestApiShop.Services;
 using Xunit;
 
 namespace EfCoreUnitTests
 {
-    public class CrockeryControllerTests
+    public class VegetableControllerTests
     {
         [Fact]
-        public async Task Test()
+        public async Task ControllerAppliesDiscountGet()
         {
             //Arrange
 
@@ -27,16 +28,23 @@ namespace EfCoreUnitTests
                 cfg.AddProfile(new MappingsProfile());
             });
             var mapper = mockMapper.CreateMapper();
+
             var discountService = new DiscountService();
-            var priceCalculationService = new PriceCalculationService<CrockeryDto>(discountService);
-            var mockContext = new DataContext(GetInMemoryDbContextOptions());
-            mockContext.Shops.Add(new Shop() {Id = 99});
-            mockContext.SaveChanges();
-            var repository = new GenericRepository<Crockery>(mockContext);
-            var crockeryController = new CrockeryController(mapper, repository, priceCalculationService);
-            var crockeryDto = new CrockeryDto()
+            var priceCalculationService = new PriceCalculationService<VegetableDto>(discountService);
+            
+            var repository = new Mock<IGenericRepository<Vegetable>>();
+            repository.Setup(r => r.GetAll()).ReturnsAsync(new List<Vegetable>()
             {
-                Name = "TestCrockery",
+                new Vegetable()
+                {
+                    Price = 3M
+                }
+            });
+
+            var vegetableController = new VegetableController(mapper, repository.Object, priceCalculationService);
+            var vegetableDto = new VegetableDto()
+            {
+                Name = "TestVegetable",
                 Price = 3.00M,
                 ShopId = 1
             };
@@ -44,8 +52,8 @@ namespace EfCoreUnitTests
             //Arrange end
             //Act
 
-            await crockeryController.Upsert(crockeryDto);
-            var results = await crockeryController.GetAll();
+            await vegetableController.Upsert(vegetableDto);
+            var results = await vegetableController.GetAll();
 
             //Assert
 
@@ -53,7 +61,7 @@ namespace EfCoreUnitTests
             results.First().Price.Should().Be(2.70M);
 
         }
-
+        
         public static DbContextOptions<DataContext> GetInMemoryDbContextOptions(string dbName = "Test")
         {
             var options = new DbContextOptionsBuilder<DataContext>()
@@ -64,3 +72,4 @@ namespace EfCoreUnitTests
         }
     }
 }
+

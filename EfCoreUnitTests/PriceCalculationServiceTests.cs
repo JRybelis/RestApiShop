@@ -1,6 +1,5 @@
 ﻿using FluentAssertions;
-using RestApiShop.Dtos.Base;
-using RestApiShop.Dtos.Crockery;
+using RestApiShop.Dtos.Vegetable;
 using RestApiShop.Services;
 using Xunit;
 
@@ -11,18 +10,18 @@ namespace EfCoreUnitTests
         [Fact]
         public void ApplyDiscount_GivenRegularPrice_CalculateCorrectFinalPrice()
         {
-            var crockeryItem = new CrockeryDto(){
+            var vegetable = new VegetableDto(){
                 Price = 3.0M};
             //Arrange
             var discountService = new DiscountService();
             
-            var priceCalculationService = new PriceCalculationService<CrockeryDto>(discountService);
+            var priceCalculationService = new PriceCalculationService<VegetableDto>(discountService);
 
             //Act
-            var discountedCrockeryItem = priceCalculationService.ApplyDiscount(crockeryItem);
+            var discountedVegetablePrice = priceCalculationService.ApplyDiscount(vegetable, 1);
 
             //Assert
-            discountedCrockeryItem.Price.Should().Be(2.7M);
+            discountedVegetablePrice.Should().Be(2.7M);
         }
     }
 }

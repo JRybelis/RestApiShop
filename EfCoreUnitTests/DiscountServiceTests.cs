@@ -18,7 +18,7 @@ namespace EfCoreUnitTests
             var returnedDiscount = discountService.CalculateDiscount(price, 5);
 
             // Assert
-            returnedDiscount.Should().Be(0.3M);
+            returnedDiscount.Should().Be(0.6M);
         }
     }
 }
