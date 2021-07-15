@@ -4,7 +4,7 @@ namespace RestApiShop.Entities.ShopItems
 {
     public class Vegetable : Item
     {
-        Vegetable()
+        public Vegetable()
         {
             Type = nameof(Vegetable);
         }
