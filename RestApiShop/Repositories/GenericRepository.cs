@@ -17,7 +17,7 @@ namespace RestApiShop.Repositories
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public async Task<IEnumerable<T>> GetAll()
+        public async Task<List<T>> GetAll()
         {
             return await _context.Set<T>().ToListAsync();
         }

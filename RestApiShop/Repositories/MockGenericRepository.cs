@@ -6,9 +6,9 @@ using RestApiShop.Interfaces;
 
 namespace RestApiShop.Repositories
 {
-    public class MockGenericRepository<T> : IGenericRepository<T> where T : BaseEntity
+    public class MockGenericRepository<T> : IGenericRepository<T> where T : BaseEntity, new()
     {
-        public Task<IEnumerable<T>> GetAll()
+        public Task<List<T>> GetAll()
         {
             return Task.FromResult(new List<T>()
             {
