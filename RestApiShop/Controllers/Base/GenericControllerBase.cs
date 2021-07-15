@@ -4,7 +4,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using RestApiShop.Dtos.Base;
 using RestApiShop.Entities.Base;
-using RestApiShop.Repositories;
+using RestApiShop.Interfaces;
 
 namespace RestApiShop.Controllers.Base
 {
