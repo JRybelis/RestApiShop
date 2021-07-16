@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using RestApiShop.Entities.Base;
-using RestApiShop.Entities.ShopItems;
+using Core.Entities.Base;
 using RestApiShop.Interfaces;
 
 namespace RestApiShop.Repositories

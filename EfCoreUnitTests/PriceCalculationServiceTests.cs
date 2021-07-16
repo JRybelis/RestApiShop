@@ -1,5 +1,5 @@
-﻿using FluentAssertions;
-using RestApiShop.Dtos.Vegetable;
+﻿using Core.Dtos.Vegetable;
+using FluentAssertions;
 using RestApiShop.Services;
 using Xunit;
 

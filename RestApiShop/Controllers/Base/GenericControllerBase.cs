@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
+using Core.Dtos.Base;
+using Core.Entities.Base;
 using Microsoft.AspNetCore.Mvc;
-using RestApiShop.Dtos.Base;
-using RestApiShop.Entities.Base;
 using RestApiShop.Interfaces;
 
 namespace RestApiShop.Controllers.Base

@@ -1,5 +1,5 @@
 ﻿using System.Diagnostics;
-using RestApiShop.Dtos.Base;
+using Core.Dtos.Base;
 
 namespace RestApiShop.Services
 {

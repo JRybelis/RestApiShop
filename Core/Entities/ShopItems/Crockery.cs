@@ -1,7 +1,6 @@
-﻿using System;
-using RestApiShop.Entities.Base;
+﻿using Core.Entities.Base;
 
-namespace RestApiShop.Entities.ShopItems
+namespace Core.Entities.ShopItems
 {
     public class Crockery : Item
     {

@@ -1,6 +1,6 @@
-﻿using RestApiShop.Dtos.Base;
+﻿using Core.Dtos.Base;
 
-namespace RestApiShop.Dtos.Crockery
+namespace Core.Dtos.Crockery
 {
     public class CrockeryDto : ShopItemDto
     {

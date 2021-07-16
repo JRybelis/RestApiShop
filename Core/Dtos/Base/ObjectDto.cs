@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace RestApiShop.Dtos.Base
+namespace Core.Dtos.Base
 {
     public abstract class ObjectDto
     {

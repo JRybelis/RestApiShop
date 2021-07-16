@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using AutoMapper.Internal;
+using Core.Dtos.Vegetable;
+using Core.Entities.ShopItems;
 using Microsoft.AspNetCore.Mvc;
-using RestApiShop.Dtos.Vegetable;
-using RestApiShop.Entities.ShopItems;
 using RestApiShop.Interfaces;
 using RestApiShop.Services;
 

@@ -1,7 +1,6 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace RestApiShop.Dtos.Base
+namespace Core.Dtos.Base
 {
     public abstract class ShopItemDto : ObjectDto
     {

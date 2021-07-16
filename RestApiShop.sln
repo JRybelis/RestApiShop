@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.31402.337
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestApiShop", "RestApiShop\RestApiShop.csproj", "{7C3D9F85-171E-4DA9-8EDA-FC210449C991}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EfCoreUnitTests", "EfCoreUnitTests\EfCoreUnitTests.csproj", "{EF758DBB-9183-49A1-96E2-F32495969F0D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EfCoreUnitTests", "EfCoreUnitTests\EfCoreUnitTests.csproj", "{EF758DBB-9183-49A1-96E2-F32495969F0D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{EBD77E41-3BED-4F6F-9FC6-DC262F45BA11}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{EF758DBB-9183-49A1-96E2-F32495969F0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF758DBB-9183-49A1-96E2-F32495969F0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EF758DBB-9183-49A1-96E2-F32495969F0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBD77E41-3BED-4F6F-9FC6-DC262F45BA11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBD77E41-3BED-4F6F-9FC6-DC262F45BA11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBD77E41-3BED-4F6F-9FC6-DC262F45BA11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBD77E41-3BED-4F6F-9FC6-DC262F45BA11}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

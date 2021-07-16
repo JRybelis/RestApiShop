@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Core.Dtos.Fruit;
+using Core.Entities.ShopItems;
 using Microsoft.AspNetCore.Mvc;
 using RestApiShop.Controllers.Base;
-using RestApiShop.Dtos.Fruit;
-using RestApiShop.Entities.ShopItems;
-using RestApiShop.Repositories;
+using RestApiShop.Interfaces;
 using RestApiShop.Services;
 
 namespace RestApiShop.Controllers
@@ -33,9 +32,10 @@ namespace RestApiShop.Controllers
         {
             var entities = await _repository.GetAll();
             var dtos = _mapper.Map<IEnumerable<FruitDto>>(entities);
-            var updatedDtos = dtos.Select(d => _priceCalculation.ApplyDiscount(d));
+            //var updatedDtos = dtos.Select(d => _priceCalculation.ApplyDiscount(d));
 
-            return updatedDtos;
+            //return updatedDtos;
+            return dtos;
         }
     }
 }

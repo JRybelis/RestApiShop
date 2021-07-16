@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using RestApiShop.Entities.Base;
+using Core.Entities.Base;
 
 namespace RestApiShop.Interfaces
 {

@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
+using Core.Dtos.Shop;
+using Core.Entities;
 using Microsoft.AspNetCore.Mvc;
 using RestApiShop.Controllers.Base;
-using RestApiShop.Dtos.Shop;
-using RestApiShop.Entities;
 using RestApiShop.Interfaces;
 
 namespace RestApiShop.Controllers

@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
-using RestApiShop.Dtos.Base;
-using RestApiShop.Dtos.Crockery;
-using RestApiShop.Dtos.Fruit;
-using RestApiShop.Dtos.Shop;
-using RestApiShop.Dtos.Vegetable;
-using RestApiShop.Entities;
-using RestApiShop.Entities.Base;
-using RestApiShop.Entities.ShopItems;
+using Core.Dtos.Base;
+using Core.Dtos.Crockery;
+using Core.Dtos.Fruit;
+using Core.Dtos.Shop;
+using Core.Dtos.Vegetable;
+using Core.Entities;
+using Core.Entities.Base;
+using Core.Entities.ShopItems;
 
 namespace RestApiShop.Mappings
 {

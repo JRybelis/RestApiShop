@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Core.Entities.Base;
 using Microsoft.EntityFrameworkCore;
 using RestApiShop.Data;
-using RestApiShop.Entities.Base;
 using RestApiShop.Interfaces;
 
 namespace RestApiShop.Repositories

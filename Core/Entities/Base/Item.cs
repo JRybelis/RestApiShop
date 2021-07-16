@@ -1,4 +1,4 @@
-﻿namespace RestApiShop.Entities.Base
+﻿namespace Core.Entities.Base
 {
     public class Item : BaseEntity
     {

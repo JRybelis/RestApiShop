@@ -1,6 +1,6 @@
-﻿using RestApiShop.Entities.Base;
+﻿using Core.Entities.Base;
 
-namespace RestApiShop.Entities.ShopItems
+namespace Core.Entities.ShopItems
 {
     public class Fruit : Item
     {

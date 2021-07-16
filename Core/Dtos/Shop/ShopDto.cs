@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using RestApiShop.Dtos.Base;
+using Core.Dtos.Base;
 
-namespace RestApiShop.Dtos.Shop
+namespace Core.Dtos.Shop
 {
     public class ShopDto : ObjectDto
     {

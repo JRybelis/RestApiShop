@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using RestApiShop.Entities.Base;
-using RestApiShop.Entities.Relational;
-using RestApiShop.Entities.ShopItems;
+using Core.Entities.Base;
+using Core.Entities.Relational;
+using Core.Entities.ShopItems;
 
-namespace RestApiShop.Entities
+namespace Core.Entities
 {
     public class Shop : BaseEntity
     {

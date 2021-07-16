@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Core.Dtos.Crockery;
+using Core.Entities.ShopItems;
 using Microsoft.AspNetCore.Mvc;
 using RestApiShop.Controllers.Base;
-using RestApiShop.Dtos.Crockery;
-using RestApiShop.Entities.ShopItems;
-using RestApiShop.Repositories;
+using RestApiShop.Interfaces;
 using RestApiShop.Services;
 
 namespace RestApiShop.Controllers
@@ -31,9 +30,10 @@ namespace RestApiShop.Controllers
         {
         var entities = await _repository.GetAll();
         var dtos = _mapper.Map<IEnumerable<CrockeryDto>>(entities);
-        var updatedDtos = dtos.Select(d => _priceCalculation.ApplyDiscount(d));
+        //var updatedDtos = dtos.Select(d => _priceCalculation.ApplyDiscount(d));
         
-        return updatedDtos;
+        //return updatedDtos;
+        return dtos;
         }
     }
 

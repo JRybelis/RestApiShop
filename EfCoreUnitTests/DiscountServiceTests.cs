@@ -7,8 +7,11 @@ namespace EfCoreUnitTests
 {
     public class DiscountServiceTests
     {
-        [Fact]
-        public void CalculateDiscount_GivenRegularPrice_CalculatesCorrectDiscount()
+        [Theory]
+        [InlineData(3M, typeof(new DiscountService()), 5)]
+        [InlineData(4M, typeof(new DiscountService()), 2)]
+        [InlineData()] 
+        public void CalculateDiscount_GivenRegularPrice_CalculatesCorrectDiscount(decimal price, DiscountService discountService, int quantity)
         {
             // Arrange
             var price = 3.0M;
