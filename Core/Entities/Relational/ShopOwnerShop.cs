@@ -1,6 +1,4 @@
-﻿using RestApiShop.Entities;
-
-namespace Core.Entities.Relational
+﻿namespace Core.Entities.Relational
 {
     public class ShopOwnerShop
     {

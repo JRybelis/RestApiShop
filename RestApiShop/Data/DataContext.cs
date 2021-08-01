@@ -1,8 +1,8 @@
 ﻿using System.Linq;
+using Core.Entities;
+using Core.Entities.Relational;
+using Core.Entities.ShopItems;
 using Microsoft.EntityFrameworkCore;
-using RestApiShop.Entities;
-using RestApiShop.Entities.Relational;
-using RestApiShop.Entities.ShopItems;
 
 namespace RestApiShop.Data
 {
