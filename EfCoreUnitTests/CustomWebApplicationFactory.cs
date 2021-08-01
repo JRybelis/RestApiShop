@@ -21,7 +21,11 @@ namespace EfCoreUnitTests
                 services.Remove(descriptor);
                 services.AddDbContext<DataContext>(options =>
                 {
-                    options.UseInMemoryDatabase("InMemoryDbForTesting");
+                    
+                    string _dbName = Guid.NewGuid().ToString();
+
+                    options.UseInMemoryDatabase(_dbName);
+
                 });
 
                 var sp = services.BuildServiceProvider();

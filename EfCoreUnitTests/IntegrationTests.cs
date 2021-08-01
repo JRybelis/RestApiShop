@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Core.Entities.ShopItems;
 using FluentAssertions;
 using Newtonsoft.Json;
 using RestApiShop;
-using RestApiShop.Entities.ShopItems;
 using Xunit;
 
 namespace EfCoreUnitTests
@@ -30,7 +30,7 @@ namespace EfCoreUnitTests
         {
             var client = _factory.CreateClient();
             await client.DeleteAsync("/Vegetable/1");
-            
+
             var result = await client.GetAsync("/Vegetable");
             var stringContent = await result.Content.ReadAsStringAsync();
 

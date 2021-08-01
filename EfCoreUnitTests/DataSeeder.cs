@@ -1,6 +1,6 @@
 ﻿using System.Linq;
+using Core.Entities.ShopItems;
 using RestApiShop.Data;
-using RestApiShop.Entities.ShopItems;
 
 namespace EfCoreUnitTests
 {
